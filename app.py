@@ -8,18 +8,17 @@ import pandas as pd
 # ------------------------------------------------------------------------------
 st.set_page_config(
     page_title="Calculadora de Custos Industriais & PEO",
-    page_icon="🏭",
     layout="wide"
 )
 
-st.title("🏭 Calculadora de Custo de Fabricação e Ponto de Equilíbrio")
+st.title("Calculadora de Custo de Fabricação e Ponto de Equilíbrio")
 st.caption("Desenvolvido pelo Squad: Gabriel Fogaça, Caio Abreu e Julia Perez | UNESP - Gestão de Projetos")
 st.markdown("---")
 
 # ------------------------------------------------------------------------------
 # BARRA LATERAL: ENTRADA DE DADOS FABRIS
 # ------------------------------------------------------------------------------
-st.sidebar.header("⚙️ Parâmetros da Manufatura")
+st.sidebar.header("Parâmetros da Manufatura")
 
 # Custos Fixos
 st.sidebar.subheader("1. Custos Fixos Totais (Mensal)")
@@ -74,12 +73,12 @@ else:
     # --------------------------------------------------------------------------
     # MÓDULO DE DIAGNÓSTICO E SUGESTÕES PARA A EMPRESA (NOVO!)
     # --------------------------------------------------------------------------
-    st.subheader("💡 Diagnóstico e Recomendações Estratégicas para a Gestão")
+    st.subheader("Diagnóstico e Recomendações Estratégicas para a Gestão")
     
     col_diag1, col_diag2 = st.columns(2)
 
     with col_diag1:
-        st.markdown("##### 🟢 Análise da Margem de Contribuição")
+        st.markdown("##### Análise da Margem de Contribuição")
         if margem_contrib_percentual < 20:
             st.error(f"**Margem Baixa ({margem_contrib_percentual:.1f}%):** O produto é vulnerável a variações de custo. **Sugestão:** Renegociar preços de insumos ou reavaliar o preço de venda para aumentar a segurança financeira.")
         elif margem_contrib_percentual <= 40:
@@ -88,7 +87,7 @@ else:
             st.success(f"**Margem Alta ({margem_contrib_percentual:.1f}%):** Excelente rentabilidade por unidade. **Sugestão:** Produto altamente lucrativo; focar em estratégias de ganho de mercado e escala.")
 
     with col_diag2:
-        st.markdown("##### ⚙️ Análise de Ocupação da Capacidade Fabril")
+        st.markdown("##### Análise de Ocupação da Capacidade Fabril")
         if taxa_ocupacao_peo > 85:
             st.error(f"**Risco Operacional Alto (PEO consome {taxa_ocupacao_peo:.1f}% da capacidade):** A fábrica precisa operar quase no limite máximo só para cobrir custos. **Sugestão:** Reduzir Custos Fixos (ex.: renegociar aluguel) ou aumentar o preço unitário.")
         elif taxa_ocupacao_peo > 50:
@@ -104,7 +103,7 @@ else:
     col_grafico, col_dados = st.columns([2, 1])
 
     with col_grafico:
-        st.subheader("📈 Gráfico de Ponto de Equilíbrio Operacional")
+        st.subheader(" Gráfico de Ponto de Equilíbrio Operacional")
         
         eixo_unidades = np.linspace(0, max(capacidade_maxima, int(peo_unidades * 1.4)), 100)
         linha_custo_total = custo_fixo_total + (custo_var_unitario * eixo_unidades)
@@ -125,7 +124,7 @@ else:
         st.pyplot(fig)
 
     with col_dados:
-        st.subheader("📋 Resumo da Estrutura")
+        st.subheader("Resumo da Estrutura")
         
         df_resumo = pd.DataFrame({
             "Componente": ["Aluguel/Admin", "Depreciação", "CIF Fixo", "Matéria-Prima", "MOD", "Energia"],
@@ -137,7 +136,7 @@ else:
 
         csv = df_resumo.to_csv(index=False).encode('utf-8')
         st.download_button(
-            label="📥 Exportar Dados (CSV)",
+            label="Exportar Dados (CSV)",
             data=csv,
             file_name="relatorio_custos_fabris.csv",
             mime="text/csv",
