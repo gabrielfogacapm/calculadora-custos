@@ -60,7 +60,7 @@ else:
     # --------------------------------------------------------------------------
     # DASHBOARD DE INDICADORES
     # --------------------------------------------------------------------------
-    st.subheader("📌 Indicadores Económico-Operacionais")
+    st.subheader("Indicadores Económico-Operacionais")
     
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Custo Fixo Total", f"R$ {custo_fixo_total:,.2f}")
